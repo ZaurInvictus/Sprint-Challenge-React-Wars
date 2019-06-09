@@ -5,3 +5,18 @@
   color: #443e3e;
   text-shadow: 1px 1px 5px #fff;
 }
+
+button {
+  background-color: #C7AF8D;
+  border: none;
+  border-radius: 1px;
+  color: white;
+  outline: none;
+  margin: 5px;
+  padding:  3px 5px;
+}
+
+button:hover {
+  background-color: rgb(255, 255, 255);
+  color: #C7AF8D;
+}
