@@ -38,12 +38,6 @@ class App extends Component {
  
   //Pagination System with Buttons
   page1 = () => {
-    let pageNumber = 1;
-   //  pageNumber++;
-    this.getCharacters( `https://swapi.co/api/people/?page=${pageNumber}`);
-  }
-
-  page1 = () => {
     this.getCharacters( `https://swapi.co/api/people/?page=1`);
   }
   page2 = () => {
@@ -58,7 +52,7 @@ class App extends Component {
   page5 = () => {
      this.getCharacters( `https://swapi.co/api/people/?page=5`);
    }
-
+  
 
   render() {
     return (
