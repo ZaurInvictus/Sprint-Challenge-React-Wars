@@ -6,7 +6,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      count: 2
     };
   }
 
@@ -37,32 +38,74 @@ class App extends Component {
 
  
   //Pagination System with Buttons
-  page1 = () => {
-    this.getCharacters( `https://swapi.co/api/people/?page=1`);
+  // page1 = () => {
+  //   this.getCharacters( `https://swapi.co/api/people/?page=1`);
+  // }
+  // page2 = () => {
+  //    this.getCharacters( `https://swapi.co/api/people/?page=2`);
+  //  }
+  // page3 = () => {
+  //    this.getCharacters( `https://swapi.co/api/people/?page=3`);
+  //  }
+  // page4 = () => {
+  //    this.getCharacters( `https://swapi.co/api/people/?page=4`);
+  //  }
+  // page5 = () => {
+  //    this.getCharacters( `https://swapi.co/api/people/?page=5`);
+  //  }
+  
+
+  //Pagination System with NEXT & PREVIOUS Buttons
+  nextCounter = () => {
+    this.setState(prevState => ({
+      count: prevState.count + 1
+    }));
   }
-  page2 = () => {
-     this.getCharacters( `https://swapi.co/api/people/?page=2`);
-   }
-  page3 = () => {
-     this.getCharacters( `https://swapi.co/api/people/?page=3`);
-   }
-  page4 = () => {
-     this.getCharacters( `https://swapi.co/api/people/?page=4`);
-   }
-  page5 = () => {
-     this.getCharacters( `https://swapi.co/api/people/?page=5`);
-   }
+  prevCounter = () => {
+    this.setState(prevState => ({
+      count: prevState.count - 1
+    }));
+  }
+
+  nextPage = () => {
+    this.nextCounter();
+    let pageNumber = parseInt(this.state.count);
+    console.log(pageNumber)
+    if(pageNumber < 9) {
+      this.getCharacters( `https://swapi.co/api/people/?page=${pageNumber}`);
+    } else {
+      this.setState({
+        count: 1
+      });
+    }
+  }
+
+  prevPage = () => {
+    this.prevCounter();
+    let pageNumber = parseInt(this.state.count);
+    console.log(pageNumber)
+    if(pageNumber > 1) {
+      this.getCharacters( `https://swapi.co/api/people/?page=${pageNumber}`);
+    } else {
+      this.setState({
+        count: 9
+      });
+    }
+  }
+  
   
 
   render() {
     return (
       <div className="App">
         <h1 className="Header">React Wars</h1>
-        <button onClick={this.page1}>Page 1</button>
+        <button onClick={this.nextPage}>Next Page</button>
+        <button onClick={this.prevPage}>Prev Page</button>
+        {/* <button onClick={this.page1}>Page 1</button>
         <button onClick={this.page2}>Page 2</button>
         <button onClick={this.page3}>Page 3</button>
         <button onClick={this.page4}>Page 4</button>
-        <button onClick={this.page5}>Page 5</button>
+        <button onClick={this.page5}>Page 5</button> */}
         {this.state.starwarsChars.map((item, index) => {
           return <Star star={item} key={index} />
         })}
